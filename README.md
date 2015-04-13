@@ -7,4 +7,4 @@ Use Docker and fig to run the application. First you clone it with git, and if y
   
 And wait for the container to build and run. After it finishes just open your browser at:
 
-http://localhost:8080
+[http://localhost:8080](https://localhost:8080)
