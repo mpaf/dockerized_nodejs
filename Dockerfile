@@ -3,14 +3,19 @@ FROM centos:centos6
 # Enable EPEL for Node.js
 RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 # Install Node.js and npm
+RUN yum install -y tar
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
+RUN source ~/.nvm/nvm.sh && nvm install 0.12
+RUN source ~/.nvm/nvm.sh && nvm use 0.12
 RUN yum install -y npm
 
 # Install MEAN.js required packages
 npm install -g grunt
 npm install -g bower
+npm install -g express
 
 # Bundle app source
-COPY . /src
+COPY nodeapp/. /src
 # Install app dependencies
 RUN cd /src; npm install
 
@@ -26,9 +31,9 @@ RUN easy_install supervisor
 RUN mkdir -p /var/log/supervisor
 ADD ./files/supervisord.conf /etc/supervisord.conf
 
-npm install mongoose
-npm install angular-ui-router
-npm install bootsrap
+RUN npm install mongoose
+RUN npm install angular-ui-router
+RUN npm install bootstrap
 
 # Open port 8080
 EXPOSE 8080
