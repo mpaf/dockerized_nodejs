@@ -1,0 +1,5 @@
+web:
+  build: .
+  command: supervisord -n
+  ports:
+    - "8080:8080"

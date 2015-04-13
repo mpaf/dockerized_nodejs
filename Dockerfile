@@ -5,6 +5,10 @@ RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.
 # Install Node.js and npm
 RUN yum install -y npm
 
+# Install MEAN.js required packages
+npm install -g grunt
+npm install -g bower
+
 # Bundle app source
 COPY . /src
 # Install app dependencies
@@ -21,6 +25,10 @@ RUN yum install -y python-setuptools
 RUN easy_install supervisor
 RUN mkdir -p /var/log/supervisor
 ADD ./files/supervisord.conf /etc/supervisord.conf
+
+npm install mongoose
+npm install angular-ui-router
+npm install bootsrap
 
 # Open port 8080
 EXPOSE 8080
